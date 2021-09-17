@@ -1,5 +1,8 @@
 import { useProduct } from "../Context/ProductContext"
-
+import {TOGGLE_DELIVERY ,
+TOGGLE_INVENTORY ,
+SORT ,
+CLEAR } from "../Reducer/ProductReducer"
 export const Filter = () =>{
 
     const {productState,productDispatch} = useProduct()
@@ -7,9 +10,9 @@ export const Filter = () =>{
     return(
         <div className="side-nav">
             <div className="horizontal-card filter-title space-between center pd2-l-r">
-                <p className="md-txt"> Filters </p>
-                <button className="btn link-btn md-btn" style={{ margin: "0 1rem" }}
-                    onClick={() => productDispatch({ type: "clear" })}>
+                <p className="md-txt filter-btn"> Filters </p>
+                <button className="btn link-btn clear"
+                    onClick={() => productDispatch({ type: CLEAR })}>
                     clear
                 </button>
             </div>
@@ -21,7 +24,7 @@ export const Filter = () =>{
                             className="mg1-r"
                             id="fastDelivery"
                             type="checkbox"
-                            onChange={() => productDispatch({ type: "TOGGLE_DELIVERY" })}
+                            onChange={() => productDispatch({ type: TOGGLE_DELIVERY })}
                         ></input>
                     fast delivery
                     </label>
@@ -32,7 +35,7 @@ export const Filter = () =>{
                             className="mg1-r"
                             checked={productState.showInventoryAll}
                             id="showInStock"
-                            onChange={() => productDispatch({ type: "TOGGLE_INVENTORY" })}
+                            onChange={() => productDispatch({ type: TOGGLE_INVENTORY })}
                         ></input>
                     Include out of Stock
                     </label>
@@ -44,9 +47,9 @@ export const Filter = () =>{
                     name="sort"
                     className="mg1-r"
                     type="radio"
-                    checked={productState.uncheck}
+                    checked={productState.sortBy && productState.sortBy==="Price-low-high"}
                     onClick={() =>
-                        productDispatch({ type: "SORT", payLoad: "Price-low-high" })
+                        productDispatch({ type: SORT, payLoad: "Price-low-high" })
                     }
                     ></input>
                     Price-Low-to-high
@@ -56,9 +59,9 @@ export const Filter = () =>{
                     name="sort"
                     className="mg1-r"
                     type="radio"
-                    checked={productState.uncheck}
+                    checked={productState.sortBy && productState.sortBy==="Price-high-low"}
                     onClick={() =>
-                        productDispatch({ type: "SORT", payLoad: "Price-high-low" })
+                        productDispatch({ type: SORT, payLoad: "Price-high-low" })
                     }
                     ></input>
                     Price-High-to-Low

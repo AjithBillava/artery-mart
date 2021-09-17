@@ -1,8 +1,9 @@
 export const TOGGLE_DELIVERY = "TOGGLE_DELIVERY";
 export const TOGGLE_INVENTORY = "TOGGLE_INVENTORY";
 export const SORT = "SORT";
+export const CLEAR = "CLEAR";
 
-export const reducerFunc = (state, { type, payLoad, uncheck }) => {
+export const reducerFunc = (state, { type, payLoad}) => {
   switch (type) {
     case TOGGLE_DELIVERY:
       return (state = {
@@ -18,13 +19,12 @@ export const reducerFunc = (state, { type, payLoad, uncheck }) => {
     case SORT:
       return (state = {
         ...state,
-        sortBy: payLoad,
-        uncheck: uncheck
+        sortBy: payLoad
       });
-    case "clear":
+    case CLEAR:
       return (state = {
         ...state,
-        uncheck: false,
+        sortBy: false,
         showInventoryAll: false,
         showFastDeliveryOnly: false
       });
